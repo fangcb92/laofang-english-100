@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>老方英语100天计划</title>
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --panel: #ffffff;
+      --text: #1f2933;
+      --muted: #65717d;
+      --line: #dbe1ea;
+      --primary: #1d5fa8;
+      --primary-dark: #154780;
+      --accent: #f0b429;
+      --soft: #edf3fb;
+      --ok: #1f7a55;
+      --danger: #b23b3b;
+      --shadow: 0 14px 36px rgba(20, 30, 50, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .app {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 14px 48px;
+    }
+
+    .topbar {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #e8f0fb 100%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: clamp(26px, 5vw, 38px);
+      line-height: 1.2;
+    }
+
+    .slogan {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .method {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr 1.3fr;
+      gap: 10px;
+    }
+
+    .btn,
+    .select {
+      min-height: 42px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      padding: 8px 12px;
+    }
+
+    .btn:hover {
+      border-color: var(--primary);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn.ghost {
+      background: var(--soft);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .btn.on {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .btn.rec {
+      background: #fff1f1;
+      border-color: #f0c4c4;
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    aside {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lesson-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    h2 {
+      margin: 2px 0 0;
+      font-size: 22px;
+    }
+
+    h3 {
+      margin: 18px 0 10px;
+      font-size: 17px;
+    }
+
+    .side-section h3:first-child {
+      margin-top: 0;
+    }
+
+    .day-tag {
+      flex-shrink: 0;
+      background: #fff6dd;
+      color: #8a5a00;
+      border: 1px solid #f5d98a;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .mode-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .mode-row .btn {
+      min-height: 36px;
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+
+    .mode-tip {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .phrase-list,
+    .word-list,
+    .review-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .phrase,
+    .word,
+    .review-phrase {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 48px;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+
+    .english {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .chinese {
+      color: var(--text);
+    }
+
+    .usage {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hide-en .phrase .english {
+      filter: blur(7px);
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .hide-en .phrase.revealed .english {
+      filter: none;
+    }
+
+    .sound {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .sound:hover {
+      background: var(--primary-dark);
+    }
+
+    .pattern-box {
+      border: 1px dashed #9fbbe0;
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .pattern-main {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .subs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .sub {
+      border: 1px solid #b8cde9;
+      background: #fff;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    .sub:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .task-box {
+      margin-top: 16px;
+      background: #fffaf0;
+      border: 1px solid #f5e1b0;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .task-box h3 {
+      margin-top: 0;
+    }
+
+    .recorder {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .recorder audio {
+      height: 36px;
+      max-width: 100%;
+    }
+
+    .rec-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--soft);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e3e9f2;
+      border-radius: 999px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .progress div {
+      height: 100%;
+      background: var(--ok);
+      width: 0;
+      transition: width 0.3s;
+    }
+
+    .done-msg {
+      display: none;
+      margin-top: 10px;
+      color: var(--ok);
+      font-weight: 700;
+    }
+
+    .done-msg.show {
+      display: block;
+    }
+
+    .word .english {
+      font-size: 17px;
+    }
+
+    .review-item {
+      display: grid;
+      gap: 8px;
+    }
+
+    .review-origin {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .review-phrase .english {
+      font-size: 16px;
+    }
+
+    .review-phrase .sound,
+    .word .sound {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .quiz-box {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+
+    .quiz-box.show {
+      display: block;
+    }
+
+    .quiz-answer {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .quiz-answer.show {
+      display: block;
+    }
+
+    .small-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .sync-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sync-area {
+      width: 100%;
+      min-height: 72px;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      resize: vertical;
+      font-size: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+      background: #1f2933;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s;
+      max-width: calc(100% - 32px);
+      z-index: 10;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 820px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .english {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="topbar">
+      <div class="hero">
+        <h1>老方英语100天计划</h1>
+        <p class="slogan">每天5句，100天后在曼谷敢用英语开口。</p>
+        <p class="method">练法：① 开口模式先看中文自己说 → ② 播放跟读3遍 → ③ 用今日句型换词说 → ④ 录音对比 → ⑤ 完成实战任务</p>
+      </div>
+
+      <div class="controls" aria-label="天数切换">
+        <button class="btn" id="prevDay">前一天</button>
+        <select class="select" id="daySelect" aria-label="选择学习天数"></select>
+        <button class="btn" id="nextDay">后一天</button>
+        <button class="btn ghost" id="copyToday">复制今日内容</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="lesson-head">
+          <div>
+            <p class="meta" id="categoryText"></p>
+            <h2 id="themeText"></h2>
+          </div>
+          <span class="day-tag" id="dayText"></span>
+        </div>
+
+        <div class="mode-row">
+          <button class="btn" id="hideToggle">开口模式：关</button>
+          <button class="btn" id="slowToggle">慢速：关</button>
+          <button class="btn ghost" id="playAll">▶ 连读5句</button>
+        </div>
+        <p class="mode-tip" id="modeTip">开口模式会遮住英文：先看中文自己说出来，再点句子看答案。</p>
+
+        <h3>今日5句</h3>
+        <div class="phrase-list" id="phraseList"></div>
+
+        <h3>今日句型 · 换词说</h3>
+        <div class="pattern-box">
+          <p class="pattern-main" id="patternText"></p>
+          <p class="usage">点下面的词听整句，然后自己再换一个词说一遍。</p>
+          <div class="subs" id="subList"></div>
+        </div>
+
+        <div class="task-box">
+          <h3>今日实战任务</h3>
+          <p id="taskText"></p>
+          <div class="recorder">
+            <button class="btn rec" id="recBtn">● 录音</button>
+            <audio id="recAudio" controls hidden></audio>
+            <span class="rec-note" id="recNote">把5句录下来，和标准发音对比听一遍。</span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="completeBtn">完成今日学习</button>
+          <button class="btn" id="randomQuiz">随机抽查</button>
+          <button class="btn" id="resetQuiz">清空抽查</button>
+        </div>
+      </article>
+
+      <aside>
+        <section class="card side-section">
+          <div class="stats">
+            <div class="stat">
+              <strong id="streakText">0</strong>
+              <span>连续学习天数</span>
+            </div>
+            <div class="stat">
+              <strong id="totalText">0</strong>
+              <span>总完成天数 / 100</span>
+            </div>
+          </div>
+          <div class="progress"><div id="progressBar"></div></div>
+          <p class="done-msg" id="doneMsg"></p>
+
+          <h3 style="margin-top: 16px;">今日5个单词</h3>
+          <div class="word-list" id="wordList"></div>
+        </section>
+
+        <section class="card side-section">
+          <h3>复习：昨天、3天前、7天前</h3>
+          <div class="review-list" id="reviewList"></div>
+        </section>
+
+        <section class="card side-section">
+          <h3>随机抽查（看中文说英文）</h3>
+          <p class="empty" id="quizEmpty">点击“随机抽查”，从已完成打卡的内容里抽一句中文，你先用英语说出来。</p>
+          <div class="quiz-box" id="quizBox">
+            <p class="chinese" id="quizChinese" style="font-size: 18px; font-weight: 700;"></p>
+            <p class="usage" id="quizUsage"></p>
+            <div class="small-row">
+              <button class="btn" id="showAnswer">我说完了，看答案</button>
+            </div>
+            <div class="quiz-answer" id="quizAnswer">
+              <p class="english" id="quizEnglish"></p>
+              <div class="small-row">
+                <button class="btn ghost" id="quizSpeak">▶ 播放</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card side-section">
+          <h3>进度同步</h3>
+          <p class="sync-note">电脑和手机各自保存进度。导出进度码后发到微信，再在另一台设备导入。</p>
+          <textarea class="sync-area" id="syncCode" placeholder="这里会显示导出的进度码，也可以粘贴另一台设备的进度码"></textarea>
+          <div class="small-row">
+            <button class="btn ghost" id="exportProgress">导出进度</button>
+            <button class="btn" id="importProgress">导入进度</button>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // 每天一段：#天数|主题，5行句子（英文|中文|场景），P|句型|换词（/ 分隔），W|单词=中文;…，T|实战任务
+    const lessonText = `
+#1|打招呼与自我介绍
+Hi, I'm Lao Fang.|你好，我是老方。|第一次见面介绍自己
+Nice to meet you.|很高兴认识你。|握手时说
+I'm from China.|我来自中国。|别人问你是哪里人
+I live in Bangkok now.|我现在住在曼谷。|介绍现在的生活
+How about you?|你呢？|把问题抛回给对方，聊天不冷场
+P|I'm from ___.|China / Guangdong / Shanghai
+W|name=名字;meet=见面，认识;from=来自;live=居住;now=现在
+T|对着手机说：Hi, I'm Lao Fang. I'm from China. I live in Bangkok now. 录下来听一遍。
+
+#2|听不懂时的救命句
+Sorry, I don't understand.|抱歉，我没听懂。|听不懂就直说，比装懂强
+Can you say that again?|你能再说一遍吗？|没听清
+Slowly, please.|请慢一点。|对方说太快
+What does that mean?|那是什么意思？|听到生词
+How do you say this in English?|这个用英语怎么说？|指着东西问
+P|Can you ___, please?|say it again / speak slowly / write it down
+W|understand=听懂，理解;again=再一次;slowly=慢慢地;mean=意思是;say=说
+T|今天和任何一个说英语的人聊天时，至少用一次 Can you say that again?
+
+#3|礼貌用语
+Thank you so much.|太感谢了。|别人帮了你
+No problem.|没问题。|回应感谢或请求
+Excuse me.|打扰一下。|叫人、借过
+Sorry about that.|那事抱歉了。|小失误道歉
+Have a nice day!|祝你今天愉快！|离开时说
+P|Thanks for ___.|your help / coming / waiting
+W|thanks=谢谢;sorry=抱歉;excuse=打扰，原谅;please=请;welcome=欢迎
+T|今天至少说5次 Thank you / Thanks for ...，对店员、司机、同事都行。
+
+#4|数字和价格
+How much is it?|多少钱？|买东西
+It's 200 baht.|200泰铢。|说价格
+That's too expensive.|太贵了。|嫌贵
+Any discount?|有折扣吗？|砍价
+I'll take two.|我要两个。|决定买
+P|It's ___ baht.|50 / 199 / 1,500
+W|price=价格;cheap=便宜的;expensive=贵的;discount=折扣;total=总共
+T|今天每花一笔钱，都用英语说出来：It's ... baht.
+
+#5|时间
+What time is it?|几点了？|问时间
+It's ten thirty.|十点半。|报时间
+I'm free at three.|我三点有空。|约时间
+See you tomorrow.|明天见。|告别
+Sorry, I'm late.|抱歉，我迟到了。|迟到时
+P|See you ___.|tomorrow / at three / on Monday
+W|time=时间;today=今天;tomorrow=明天;morning=早上;late=迟的
+T|今天每次看手机，就用英语说出时间：It's ...
+
+#6|介绍我的生意
+What do you do?|你是做什么的？|问职业
+I run a live-streaming business.|我做直播电商生意。|介绍你的生意
+We sell on TikTok.|我们在TikTok上卖货。|说明渠道
+I have a team in Bangkok.|我在曼谷有个团队。|说明团队
+Business is getting better.|生意越来越好了。|聊近况
+P|We sell ___.|clothes / bags / beauty products
+W|business=生意;sell=卖;team=团队;live-streaming=直播;online=线上
+T|用英语说3句话介绍你的生意，录成30秒语音。
+
+#7|喜欢和不喜欢
+I like Thai food.|我喜欢泰国菜。|聊吃的
+I don't like spicy food.|我不喜欢辣的。|说不喜欢
+I love it!|我太喜欢了！|很喜欢
+It's OK.|还行。|一般般
+What do you like?|你喜欢什么？|反问对方
+P|I like ___.|coffee / Bangkok / my job
+W|like=喜欢;love=爱;food=食物;spicy=辣的;favorite=最喜欢的
+T|用 I like ... 和 I don't like ... 各说3句。
+
+#8|有没有、是不是
+Do you have this?|你们有这个吗？|找东西
+Is it far?|远吗？|问距离
+Is this OK?|这样可以吗？|确认
+Yes, of course.|是的，当然。|肯定回答
+No, not really.|不，不太是。|委婉否定
+P|Do you have ___?|a bag / Wi-Fi / a smaller size
+W|have=有;far=远的;OK=可以;of course=当然;really=真的
+T|今天去一家店，用 Do you have ...? 问一个东西。
+
+#9|问路
+Where is the toilet?|洗手间在哪？|商场、办公室
+How do I get to the BTS?|去BTS怎么走？|问轻轨站
+Go straight.|直走。|指路
+Turn left here.|在这里左转。|指路
+It's near here.|就在这附近。|说位置
+P|Where is ___?|the toilet / the exit / the BTS station
+W|where=哪里;left=左;right=右;straight=直着;near=近的
+T|出门时用英语说出你的路线：Go straight, turn left...
+
+#10|打车
+Please go to Sukhumvit Soi 11.|请去素坤逸11巷。|上车说目的地
+Please use the meter.|请打表。|坐出租车
+Stop here, please.|请在这停。|下车
+Can you wait a minute?|能等一下吗？|让司机等
+I'm in front of the 7-Eleven.|我在7-11门口。|告诉Grab司机你的位置
+P|I'm in front of ___.|the 7-Eleven / the mall / my condo
+W|taxi=出租车;stop=停;wait=等;meter=计价器;in front of=在…前面
+T|下次坐车时，用英语对司机说一句话。
+
+#11|打电话
+Hello, this is Lao Fang.|你好，我是老方。|电话开头
+Is now a good time?|现在方便吗？|打电话先问
+Sorry, the line is bad.|抱歉，信号不好。|听不清
+I'll call you back.|我等下回你电话。|不方便时
+Please send me a message.|请给我发个消息。|电话说不清就让对方发文字
+P|I'll call you ___.|back / later / tomorrow
+W|call=打电话;message=消息;line=线路;later=稍后;busy=忙的
+T|模拟一通英语电话，把5句连起来说一遍并录音。
+
+#12|接话不冷场
+Really?|真的吗？|表示惊讶、感兴趣
+That's great!|太好了！|对方说好消息
+I see.|我明白了。|听懂时回应
+Me too.|我也是。|有共同点
+That makes sense.|有道理。|认同对方
+P|That's ___!|great / amazing / too bad
+W|really=真的;great=很棒的;see=明白;too=也;sense=道理
+T|看一段英文视频，每听懂一句就大声接一句 I see / Really?
+
+#13|天气和寒暄
+It's so hot today.|今天好热。|曼谷最常用的开场白
+It's going to rain.|要下雨了。|看天
+I need a coffee.|我需要一杯咖啡。|随口闲聊
+How's your day?|今天过得怎么样？|问候同事
+Not bad, thanks.|还不错，谢谢。|回答问候
+P|It's so ___ today.|hot / busy / quiet
+W|hot=热的;rain=雨;weather=天气;day=一天;bad=坏的
+T|早上见到同事，用英语聊一句天气。
+
+#14|说“我想要”
+I want a coffee.|我想要杯咖啡。|直接说需求
+I'd like the bill, please.|请买单。|比 I want 更礼貌
+Can I have some water?|能给我点水吗？|要东西
+I need help.|我需要帮助。|求助
+I'm looking for my phone.|我在找我的手机。|找东西
+P|I'd like ___, please.|a coffee / the bill / a receipt
+W|want=想要;need=需要;would like=想要（礼貌）;water=水;look for=寻找
+T|今天点餐或买东西时，用 I'd like ... 说一次。
+
+#15|第一阶段复盘
+Hi, I'm Lao Fang, from China.|你好，我是老方，来自中国。|开场
+I run a business in Bangkok.|我在曼谷做生意。|介绍自己
+My English is not very good.|我英语不太好。|先说明，对方会自动放慢
+But I'm learning every day.|但我每天都在学。|给自己打气
+Thanks for your patience.|谢谢你的耐心。|对方听你慢慢说时
+P|I'm learning ___.|English / Thai / every day
+W|learn=学习;every day=每天;good=好的;patience=耐心;business=生意
+T|把 Day 1-15 的自我介绍串起来，录一条1分钟的英语视频。
+
+#16|便利店
+Can I have a bag?|能给我个袋子吗？|7-11结账
+Can I pay by QR code?|可以扫码付吗？|付款
+Heat it up, please.|请帮我加热。|微波便当
+Where's the ice?|冰在哪里？|找东西
+Can I have a receipt?|能给我收据吗？|要报销
+P|Can I pay by ___?|card / cash / QR code
+W|bag=袋子;pay=付款;cash=现金;receipt=收据;heat=加热
+T|下次去7-11，用英语说一句 Can I have a bag?
+
+#17|餐厅点餐
+Can I see the menu?|能看下菜单吗？|坐下后
+What do you recommend?|你推荐什么？|不知道吃什么
+Not spicy, please.|不要辣。|点泰国菜必备
+No coriander, please.|不要香菜。|忌口
+Can I get this to go?|这个能打包吗？|吃不完
+P|No ___, please.|ice / sugar / coriander
+W|menu=菜单;recommend=推荐;order=点菜;to go=打包带走;spicy=辣的
+T|今天吃饭时，用英语点一个菜。
+
+#18|咖啡和奶茶
+An iced latte, please.|一杯冰拿铁。|点咖啡
+Less sweet, please.|少甜。|泰国饮料很甜
+Less ice, please.|少冰。|冰量
+What size?|什么杯型？|店员会问你
+For here or to go?|堂食还是带走？|店员会问你
+P|___ sweet, please.|less / no / normal
+W|iced=冰的;sweet=甜的;size=杯型;latte=拿铁;sugar=糖
+T|买咖啡时，用英语说出甜度和冰量。
+
+#19|外卖和快递
+I'm coming down now.|我现在下楼。|骑手到了
+Please leave it at the front desk.|请放在前台。|不方便下楼
+Which building are you at?|你在哪栋楼？|骑手找不到
+My order is missing something.|我的订单少了东西。|漏送
+The package is for Room 1203.|包裹是1203房的。|跟保安说
+P|Please leave it ___.|at the front desk / at the door / with security
+W|order=订单;package=包裹;delivery=配送;front desk=前台;building=楼
+T|下次收外卖，用英语给骑手发一条消息。
+
+#20|公寓报修
+My air conditioner is broken.|我的空调坏了。|报修
+When can someone come?|什么时候能来人？|约维修
+There's no hot water.|没有热水。|报修
+I lost my key card.|我房卡丢了。|找前台
+Can I pay the rent online?|房租能网上付吗？|交房租
+P|My ___ is broken.|air conditioner / light / door lock
+W|broken=坏的;repair=修理;key card=门卡;rent=房租;water=水
+T|用英语描述你家里一个需要修的东西。
+
+#21|买生活用品
+Where can I find shampoo?|洗发水在哪里？|超市找东西
+Do you have a bigger one?|有大一点的吗？|换规格
+Is this on sale?|这个打折吗？|问优惠
+I'll take this one.|我要这个。|决定买
+Can I return it?|能退货吗？|买错了
+P|Do you have a ___ one?|bigger / smaller / cheaper
+W|shampoo=洗发水;bigger=更大的;on sale=打折;return=退货;bottle=瓶
+T|逛超市时，用英语说出你购物车里的5样东西。
+
+#22|看病买药
+I don't feel well.|我不太舒服。|开口第一句
+I have a sore throat.|我嗓子疼。|直播说多了
+I have a fever.|我发烧了。|说症状
+How many times a day?|一天吃几次？|问药怎么吃
+Do I need to see a doctor?|我需要看医生吗？|问药店
+P|I have a ___.|headache / fever / sore throat
+W|sick=生病的;fever=发烧;medicine=药;doctor=医生;pharmacy=药店
+T|用英语说你最近身体哪里不舒服（或想象一个）。
+
+#23|按摩和理发
+Thai massage, one hour, please.|泰式按摩，一小时。|进店说
+Softer, please.|轻一点。|按摩
+Stronger, please.|重一点。|按摩
+Just a little shorter.|稍微剪短一点。|理发
+That's perfect, thanks.|刚好，谢谢。|满意
+P|___, please.|softer / stronger / shorter
+W|massage=按摩;soft=轻的;strong=用力的;haircut=理发;hour=小时
+T|下次按摩时，用英语说一句 Softer, please. 或 Stronger, please.
+
+#24|堵车和迟到
+Sorry, I'm stuck in traffic.|抱歉，我堵在路上了。|曼谷日常
+I'll be there in ten minutes.|我十分钟到。|报时间
+Please start without me.|你们先开始吧。|开会迟到
+The traffic in Bangkok is crazy.|曼谷堵车太疯狂了。|闲聊万能话题
+Let's take the BTS instead.|我们改坐轻轨吧。|换方案
+P|I'll be there in ___.|five minutes / ten minutes / half an hour
+W|traffic=交通;stuck=被困住的;minute=分钟;instead=改为;crazy=疯狂的
+T|用英语给对方发一条“我要迟到”的消息。
+
+#25|转账和付款
+I want to transfer money.|我想转账。|银行
+Can you send me the QR code?|能把收款码发我吗？|付钱给别人
+I've already paid.|我已经付了。|确认付款
+Please check the slip.|请看一下转账凭证。|泰国常说 slip
+The payment didn't go through.|付款没成功。|付款失败
+P|I've already ___.|paid / sent it / checked
+W|transfer=转账;payment=付款;account=账户;slip=转账凭证;already=已经
+T|用英语给对方发：I've already paid. Please check the slip.
+
+#26|手机和网络
+My internet is very slow.|我网很慢。|网络问题
+I want to top up my phone.|我想给手机充值。|充值
+What's the Wi-Fi password?|Wi-Fi密码是多少？|到新地方
+Can I get a new SIM card?|能办张新手机卡吗？|营业厅
+My phone is dead.|我手机没电了。|没电
+P|My ___ is very slow.|internet / phone / laptop
+W|internet=网络;password=密码;top up=充值;SIM card=手机卡;signal=信号
+T|今天把手机语言切成英文，用一整天。
+
+#27|办证办事
+What documents do I need?|我需要什么材料？|办事第一句
+Here is my passport.|这是我的护照。|递材料
+How long does it take?|要多长时间？|问时间
+When can I come back?|我什么时候能回来拿？|取件
+Do I need a photo?|需要照片吗？|问材料
+P|Do I need ___?|a photo / a copy / an appointment
+W|document=文件;passport=护照;visa=签证;copy=复印件;appointment=预约
+T|用英语列出你办签证需要的3样材料。
+
+#28|预约和改时间
+Can I book for tomorrow?|能约明天吗？|预约
+Is 3 p.m. OK?|下午三点可以吗？|定时间
+I need to change the time.|我需要改时间。|改约
+Sorry, I have to cancel.|抱歉，我得取消。|取消
+Please confirm.|请确认一下。|收尾
+P|Can I book for ___?|tomorrow / Friday / next week
+W|book=预约;change=改变;cancel=取消;confirm=确认;available=有空的
+T|用英语发一条改约消息：Sorry, I need to change the time.
+
+#29|和店员聊两句
+Are you busy today?|今天忙吗？|开场
+How long have you worked here?|你在这工作多久了？|多聊一句
+Your English is very good.|你英语真好。|夸人
+I come here every week.|我每周都来。|熟客
+See you next time!|下次见！|告别
+P|I come here ___.|every week / every day / sometimes
+W|busy=忙的;every=每;week=周;sometimes=有时;next time=下次
+T|对一位常去的店的店员，用英语多聊一句。
+
+#30|曼谷生活复盘
+I've lived in Bangkok for two years.|我在曼谷住了两年。|换成你的真实年数
+I love the food here.|我爱这里的食物。|聊生活
+The traffic is the worst part.|堵车是最糟的。|吐槽
+Thai people are very friendly.|泰国人很友好。|聊印象
+Bangkok feels like home now.|曼谷现在像家一样。|收尾
+P|I love the ___ here.|food / people / weather
+W|live=居住;friendly=友好的;worst=最糟的;part=部分;home=家
+T|录一条1分钟英语视频：My life in Bangkok.
+
+#31|发招聘
+We're hiring live hosts.|我们在招直播主播。|招聘开头
+Full-time or part-time.|全职兼职都可以。|说明岗位
+No experience needed.|不需要经验。|降低门槛
+Please send your photo and video.|请发你的照片和视频。|收简历
+Can you speak English or Chinese?|你会说英语或中文吗？|筛选
+P|We're hiring ___.|live hosts / an assistant / a video editor
+W|hire=招聘;host=主播;full-time=全职;part-time=兼职;experience=经验
+T|用英语写一条3句话的招聘帖。
+
+#32|面试开场
+Thanks for coming today.|谢谢你今天来。|面试开场
+Please introduce yourself.|请介绍一下你自己。|第一问
+Have you done live streaming before?|你以前做过直播吗？|问经验
+Which products have you sold?|你卖过什么产品？|问经验
+How many hours can you work?|你能工作几个小时？|问时间
+P|Have you ___ before?|done live streaming / sold clothes / worked in a team
+W|interview=面试;introduce=介绍;before=以前;product=产品;hour=小时
+T|扮演面试官，把这5句流利问一遍并录音。
+
+#33|面试追问
+Why do you want this job?|你为什么想要这份工作？|问动机
+What are you good at?|你擅长什么？|问优势
+Can you show me now?|你能现在展示一下吗？|让她试播一段
+When can you start?|你什么时候能开始？|问到岗时间
+Do you have any questions?|你有什么问题吗？|面试收尾
+P|When can you ___?|start / come in / send it
+W|why=为什么;good at=擅长;show=展示;start=开始;question=问题
+T|找一个人（或对着镜子）练一次完整的英语模拟面试。
+
+#34|谈薪资和时间
+The base salary is 15,000 baht.|底薪一万五泰铢。|讲薪资
+Plus commission.|另加提成。|讲提成
+We work six days a week.|我们一周工作六天。|讲工作制
+The live shift is from 7 to 11 p.m.|直播班是晚上7点到11点。|讲班次
+Is that OK for you?|这样你可以吗？|确认
+P|We work ___.|six days a week / eight hours a day / in shifts
+W|salary=薪水;commission=提成;shift=班次;base=基础的;week=周
+T|用英语讲清楚你公司一个岗位的薪资和工作时间。
+
+#35|录用和婉拒
+Congratulations, you got the job!|恭喜，你被录用了！|发offer
+Can you start next Monday?|下周一能开始吗？|定入职
+Please bring your ID card.|请带上身份证。|入职材料
+Sorry, it's not a good fit.|抱歉，不太合适。|委婉拒绝
+Thank you for your time.|谢谢你抽出时间。|礼貌收尾
+P|Can you start ___?|next Monday / tomorrow / this week
+W|congratulations=恭喜;fit=合适;ID card=身份证;contract=合同;start=开始
+T|用英语写一条录用消息和一条婉拒消息。
+
+#36|新人入职
+Welcome to the team!|欢迎加入团队！|第一天
+This is your trainer, Mint.|这是你的培训老师Mint。|介绍人
+Let me show you around.|我带你转转。|带参观
+Here is the live room.|这是直播间。|介绍地方
+Ask me anything.|有问题随时问我。|让新人放心
+P|This is ___.|the live room / the stock room / your desk
+W|welcome=欢迎;trainer=培训老师;show around=带…参观;room=房间;anything=任何事
+T|用英语介绍一遍你的办公室：This is ...
+
+#37|安排排班
+Who's on the live today?|今天谁播？|问排班
+You're on the morning shift.|你上早班。|排班
+Can you switch with Fon?|你能和Fon换班吗？|调班
+Please don't be late.|请不要迟到。|提醒
+Here's next week's schedule.|这是下周的排班表。|发排班
+P|You're on the ___ shift.|morning / afternoon / night
+W|schedule=排班表;switch=调换;shift=班次;late=迟到的;on time=准时
+T|用英语给团队发一条明天的排班消息。
+
+#38|布置任务
+Please do this first.|请先做这个。|排优先级
+This is urgent.|这个很急。|强调
+Can you finish it by five?|五点前能做完吗？|定时间
+Who's in charge of this?|这个谁负责？|找负责人
+Let me know when it's done.|做完告诉我。|收尾
+P|Can you finish it by ___?|five / tonight / tomorrow
+W|first=首先;urgent=紧急的;finish=完成;in charge of=负责;done=做完的
+T|用英语给同事布置一件今天的真实任务。
+
+#39|确认对方听懂
+Is that clear?|清楚吗？|比 Do you understand 更客气
+Can you repeat it for me?|你能给我复述一遍吗？|确认真懂了
+Any questions?|有问题吗？|收尾
+Let's do it together once.|我们一起做一遍。|手把手
+Show me how you do it.|做给我看看。|检查
+P|Can you ___ for me?|repeat it / show me / check it
+W|clear=清楚的;repeat=重复;question=问题;together=一起;once=一次
+T|布置任务后，用英语让对方复述一遍：Can you repeat it for me?
+
+#40|表扬员工
+Good job today!|今天干得好！|下播后
+Sales were great tonight.|今晚销售很好。|讲结果
+You're getting better and better.|你越来越好了。|讲进步
+I'm proud of you.|我为你骄傲。|鼓励
+Thanks for your hard work.|辛苦了。|最常用
+P|You're getting ___.|better / faster / more confident
+W|proud=骄傲的;hard work=辛苦工作;better=更好;sales=销售额;confident=自信的
+T|今天用英语表扬一个同事，要说具体哪里好。
+
+#41|指出问题
+Can we talk for a minute?|能聊一分钟吗？|开场
+There's a small problem.|有个小问题。|引出问题
+You were late three times this week.|你这周迟到三次了。|讲事实
+This can't happen again.|这不能再发生了。|划底线
+How can I help you improve?|我能怎么帮你改进？|给台阶
+P|There's a small ___.|problem / mistake / change
+W|problem=问题;mistake=错误;improve=改进;again=再次;minute=分钟
+T|用英语练一次“先讲事实、再给帮助”的谈话。
+
+#42|主播表现反馈
+Your energy was great.|你的状态很好。|先肯定
+Please smile more.|请多笑一笑。|提建议
+Talk a bit slower.|说慢一点。|语速
+Your voice is too low.|你声音太小了。|音量
+Look at the camera more.|多看镜头。|镜头感
+P|Please ___ more.|smile / talk / move
+W|energy=状态，能量;smile=微笑;voice=声音;camera=镜头;slower=更慢
+T|看一场直播回放，用英语写3条给主播的反馈。
+
+#43|团队早会
+Good morning, everyone.|大家早上好。|开场
+Let's start the meeting.|我们开会吧。|开始
+Yesterday we sold 300 orders.|昨天我们出了300单。|讲数据
+Today's goal is 500.|今天目标是500单。|定目标
+Let's go, team!|团队加油！|收尾
+P|Today's goal is ___.|500 orders / 100,000 baht / three hours live
+W|meeting=会议;goal=目标;order=订单;yesterday=昨天;everyone=大家
+T|用英语开一个1分钟的“迷你早会”，录下来。
+
+#44|请假与考勤
+I'm sick today.|我今天病了。|员工常这样说
+Can I take a day off tomorrow?|我明天能请假吗？|请假
+Please tell me one day before.|请提前一天告诉我。|定规矩
+Get well soon.|早日康复。|关心
+Who can cover your shift?|谁能替你的班？|安排替班
+P|Can I take ___ off?|a day / tomorrow / Friday
+W|day off=休假;sick=生病的;cover=代替;before=之前;soon=很快
+T|用英语回复一条员工的请假消息。
+
+#45|处理矛盾
+What happened?|发生什么了？|先问
+Let's calm down first.|先冷静一下。|降温
+I want to hear both sides.|我想听听双方的说法。|公平
+Let's find a solution.|我们找个解决办法。|往前走
+We're one team.|我们是一个团队。|收尾
+P|Let's ___ first.|calm down / talk / sit down
+W|happen=发生;calm down=冷静;side=一方;solution=解决办法;fair=公平的
+T|用英语想象调解一次两位同事的争执。
+
+#46|培训新人
+Watch me first.|先看我做。|示范
+Now you try.|现在你试试。|上手
+Don't worry about mistakes.|别担心犯错。|减压
+Practice makes perfect.|熟能生巧。|鼓励
+You learn fast!|你学得很快！|表扬
+P|Now you ___.|try / do it / show me
+W|watch=观看;try=尝试;practice=练习;perfect=完美的;fast=快的
+T|用这5句教别人做一件你擅长的小事。
+
+#47|激励团队
+We can do this!|我们能做到！|打气
+This month is very important.|这个月很重要。|强调
+The top seller gets a bonus.|卖得最好的有奖金。|激励
+I believe in this team.|我相信这个团队。|信任
+Let's break the record!|我们破纪录吧！|冲刺
+P|The top ___ gets a bonus.|seller / host / team
+W|bonus=奖金;important=重要的;believe=相信;record=纪录;month=月
+T|用英语给团队发一条打气消息。
+
+#48|离职谈话
+I'm sorry to see you go.|很遗憾你要走。|开场
+Can I ask why?|我能问问原因吗？|了解原因
+Is there anything we can improve?|有什么我们能改进的吗？|听意见
+Your last day is Friday.|你最后一天是周五。|交接
+Good luck with everything.|祝一切顺利。|好聚好散
+P|Good luck with ___.|everything / your new job / your studies
+W|leave=离开;reason=原因;last=最后的;luck=运气;improve=改进
+T|用英语练一次友好的离职谈话。
+
+#49|开播前准备
+Are we ready to go live?|准备好开播了吗？|开播前
+Check the light, please.|检查一下灯光。|灯光
+Is the internet OK?|网络正常吗？|网络
+Five minutes to go!|还有五分钟！|倒计时
+Let's go live!|开播！|开始
+P|Check the ___, please.|light / sound / camera
+W|ready=准备好的;go live=开播;light=灯光;sound=声音;check=检查
+T|开播前用英语说一遍检查清单。
+
+#50|直播开场
+Hi everyone, welcome to our live!|大家好，欢迎来到直播间！|开场第一句
+Where are you watching from?|你们在哪里看的？|拉互动
+Don't forget to follow us.|别忘了关注我们。|求关注
+Today we have a big sale.|今天我们有大促。|抛钩子
+Stay until the end!|待到最后！|留人
+P|Welcome to ___!|our live / our shop / the show
+W|welcome=欢迎;follow=关注;sale=促销;stay=留下;end=结束
+T|对着手机用英语练一段30秒的直播开场。
+
+#51|介绍产品
+This is our best seller.|这是我们的爆款。|上品
+It's made of cotton.|它是棉做的。|讲材质
+It's soft and light.|它又软又轻。|讲手感
+It comes in three colors.|它有三个颜色。|讲颜色
+Perfect for daily use.|日常用很合适。|讲场景
+P|It's made of ___.|cotton / leather / silk
+W|best seller=爆款;cotton=棉;soft=软的;light=轻的;daily=日常的
+T|拿起手边一件东西，用英语介绍30秒。
+
+#52|颜色和尺码
+We have black, white and pink.|我们有黑、白、粉。|讲颜色
+Which color do you like?|你们喜欢哪个颜色？|互动
+Size S to XL.|尺码S到XL。|讲尺码
+She's wearing size M.|她穿的是M码。|参考
+Check the size chart.|看一下尺码表。|引导
+P|We have ___.|black and white / size S to XL / three colors
+W|color=颜色;size=尺码;wear=穿;chart=表格;fit=合身
+T|用英语介绍一件衣服的颜色和尺码。
+
+#53|价格和优惠
+The normal price is 599.|原价599。|先报原价
+Today only 299!|今天只要299！|报优惠价
+Buy one, get one free.|买一送一。|促销
+Free shipping today.|今天包邮。|促销
+Only for the next ten minutes!|只限接下来十分钟！|制造紧迫感
+P|Today only ___!|299 / 50% off / free shipping
+W|price=价格;only=只;free=免费的;shipping=运费;off=折扣
+T|用英语喊一段30秒的优惠话术，越有激情越好。
+
+#54|催单逼单
+Add to cart now!|现在加购物车！|催单
+Only 20 left!|只剩20件！|讲库存
+Don't miss it!|别错过！|催单
+Click the yellow cart.|点击小黄车。|引导下单
+Thank you for your order!|谢谢你的下单！|感谢
+P|Only ___ left!|20 / 5 / a few
+W|cart=购物车;left=剩下的;miss=错过;click=点击;order=订单
+T|用英语练一段“倒数逼单”话术：3, 2, 1, go!
+
+#55|回答评论
+Good question!|好问题！|接评论
+Yes, we ship to your area.|是的，我们发货到你那里。|回答物流
+Let me check for you.|我帮你查一下。|争取时间
+I'll show you again.|我再给你展示一次。|回应要求
+Thanks for the comment!|谢谢你的评论！|感谢
+P|Let me ___ for you.|check / show it / ask
+W|comment=评论;ship=发货;area=地区;question=问题;again=再次
+T|编3条观众评论，用英语一一回答。
+
+#56|库存与发货
+It's in stock.|有现货。|讲库存
+It's sold out.|卖完了。|讲库存
+We'll restock next week.|下周补货。|补货
+We ship within 24 hours.|24小时内发货。|讲发货
+Delivery takes 2 to 3 days.|送到要2到3天。|讲物流
+P|We ship within ___.|24 hours / two days / a week
+W|stock=库存;sold out=售罄;restock=补货;ship=发货;delivery=送货
+T|用英语回答：When will I get my order?
+
+#57|场外指挥主播
+Show it closer to the camera.|把产品靠近镜头。|场控
+Turn it around.|转过来给大家看。|场控
+Try it on.|试穿一下。|场控
+Read the comments.|读一下评论。|场控
+Change to the next product.|换下一个产品。|场控
+P|Show the ___.|back / details / price
+W|closer=更近;turn=转;detail=细节;next=下一个;product=产品
+T|看直播回放时，用英语说出你想给主播的3个指令。
+
+#58|互动玩法
+Type 1 if you want it.|想要的扣1。|互动
+Like the video for a gift!|点赞送礼！|互动
+Share our live with friends.|把直播分享给朋友。|拉新
+We have a lucky draw at nine.|9点有抽奖。|留人
+Who's still here?|还有谁在？|互动
+P|Type ___ if you want it.|1 / yes / your size
+W|type=打字;like=点赞;share=分享;lucky draw=抽奖;gift=礼物
+T|设计一个互动环节，用英语说出来。
+
+#59|售后和差评
+Sorry for the problem.|很抱歉出了问题。|先道歉
+Please send us a photo.|请给我们发张照片。|要证据
+We'll send you a new one.|我们给你发个新的。|补发
+You can get a full refund.|你可以全额退款。|退款
+Thank you for your patience.|谢谢你的耐心。|收尾
+P|We'll send you ___.|a new one / a refund / a gift
+W|refund=退款;problem=问题;photo=照片;exchange=换货;patience=耐心
+T|用英语回复一条“收到的货坏了”的客户消息。
+
+#60|下播复盘
+How did it go today?|今天怎么样？|复盘开头
+We sold 200 orders.|我们卖了200单。|讲结果
+The second product sold best.|第二个产品卖得最好。|讲亮点
+Viewers left too fast.|观众走得太快。|讲问题
+Next time, let's start with the hot item.|下次我们先上爆款。|讲改进
+P|Next time, let's ___.|start earlier / talk faster / show more
+W|viewer=观众;sold=卖出;best=最好;item=商品;next time=下次
+T|用英语做一个30秒的今日直播复盘。
+
+#61|看数据
+The views went up.|观看量上涨了。|讲数据
+The conversion rate is low.|转化率低。|讲数据
+GMV was 80,000 baht.|GMV是8万泰铢。|讲数据
+Most buyers are women.|大部分买家是女性。|讲人群
+We need more traffic.|我们需要更多流量。|讲结论
+P|The ___ went up.|views / sales / followers
+W|views=观看量;conversion rate=转化率;traffic=流量;buyer=买家;data=数据
+T|拿出一组你的真实数据，用英语读出来。
+
+#62|选品
+Which product should we push?|我们主推哪个？|选品会
+This one has a good margin.|这个利润好。|讲利润
+It's trending on TikTok.|它在TikTok上很火。|讲热度
+Let's test it for one week.|先测一周。|做决定
+If it doesn't sell, we'll drop it.|卖不动就下架。|定规则
+P|Let's test it for ___.|one week / three days / one live
+W|push=主推;margin=利润;trending=流行的;test=测试;drop=放弃
+T|用英语说说你下周想主推哪个产品，为什么。
+
+#63|拍短视频
+Let's shoot a short video.|我们拍个短视频。|开拍
+Start with a hook.|用钩子开头。|讲方法
+Keep it under 30 seconds.|控制在30秒内。|讲时长
+One more take.|再拍一条。|重拍
+Add subtitles, please.|请加字幕。|剪辑
+P|Keep it ___.|short / simple / under 30 seconds
+W|shoot=拍摄;hook=钩子;take=一条（拍摄）;subtitle=字幕;edit=剪辑
+T|用英语给剪辑师写3条修改意见。
+
+#64|关心主播状态
+You look tired today.|你今天看起来很累。|观察
+Do you need a break?|需要休息一下吗？|关心
+Drink some water.|喝点水。|关心
+Your voice sounds great.|你声音听起来很好。|鼓励
+Keep the energy up!|保持状态！|打气
+P|Do you need ___?|a break / some water / help
+W|tired=累的;break=休息;voice=声音;energy=状态，能量;keep=保持
+T|用英语关心一下你的主播或同事。
+
+#65|平台规则
+Don't say "the best" on live.|直播不要说“最好”。|违禁词
+That word is not allowed.|那个词不允许说。|提醒
+We got a warning.|我们收到警告了。|讲情况
+Please read the rules again.|请再看一遍规则。|要求
+Let's play it safe.|我们稳一点。|定调
+P|Don't say ___ on live.|the best / number one / the cheapest
+W|rule=规则;allowed=允许的;warning=警告;safe=安全的;platform=平台
+T|用英语列出你们直播间3个不能说的词。
+
+#66|达人合作
+We'd like to work with you.|我们想和你合作。|开场
+How much for one video?|一条视频多少钱？|问价格
+We can give you a commission.|我们可以给你佣金。|讲方式
+We'll send you free samples.|我们会给你寄免费样品。|寄样
+Let's start with one video.|先合作一条视频。|小步试
+P|We'll send you ___.|free samples / the brief / the contract
+W|influencer=达人;commission=佣金;sample=样品;collaborate=合作;brief=简要说明
+T|用英语给一个达人写一条合作邀请。
+
+#67|直播事故
+The live stream just stopped!|直播突然断了！|出事
+The internet is down.|网断了。|讲原因
+Restart the app.|重启应用。|处理
+Let's switch to the backup phone.|换备用手机。|处理
+Stay calm and keep going.|保持冷静，继续播。|稳住
+P|Let's switch to the ___.|backup phone / other room / next product
+W|stop=停止;restart=重启;backup=备用的;calm=冷静的;down=故障的
+T|用英语说出你们直播断播时的处理步骤。
+
+#68|我的直播电商故事
+I started this business in 2023.|我在2023年开始做这个生意。|换成你的真实年份
+At first, we had no sales.|一开始我们没有销量。|讲开头
+We learned a lot.|我们学到了很多。|讲过程
+Now we have a good team.|现在我们有一个好团队。|讲现在
+The best is yet to come.|最好的还在后面。|收尾
+P|At first, ___.|we had no sales / it was hard / I was nervous
+W|start=开始;at first=起初;learn=学习;now=现在;yet=还
+T|录一条1分钟英语视频：My live-streaming story.
+
+#69|联系供应商
+I'm looking for a supplier.|我在找供应商。|开场
+What's your MOQ?|你们起订量是多少？|问起订量
+Can you send me a sample?|能给我寄个样品吗？|要样品
+What's the price for 1,000 pieces?|一千件什么价？|问价
+How long is the lead time?|交货期多长？|问交期
+P|What's the price for ___?|1,000 pieces / one box / 500 units
+W|supplier=供应商;MOQ=最小起订量;sample=样品;piece=件;lead time=交货期
+T|用英语问一个供应商3个问题（可以写下来）。
+
+#70|谈价格
+That's a bit high.|这有点高。|嫌贵
+Can you do better?|能再便宜点吗？|砍价
+We'll order more next time.|下次我们会多订。|给甜头
+Let's meet in the middle.|各让一步吧。|折中
+Deal!|成交！|成交
+P|Can you do ___?|better / 10% off / free shipping
+W|deal=成交;order=订购;middle=中间;high=高的;budget=预算
+T|模拟一次英语砍价，至少来回3句。
+
+#71|确认订单
+Please confirm the order.|请确认订单。|下单
+The quantity is 500 pieces.|数量是500件。|讲数量
+Please send the invoice.|请发发票。|要发票
+When will you ship?|你们什么时候发货？|问发货
+Please send me the tracking number.|请发我物流单号。|要单号
+P|Please send ___.|the invoice / the tracking number / some photos
+W|confirm=确认;quantity=数量;invoice=发票;tracking number=物流单号;ship=发货
+T|用英语写一条确认订单的消息。
+
+#72|质量问题
+Some items are damaged.|有些货损坏了。|讲问题
+The color is different from the sample.|颜色和样品不一样。|讲问题
+Here are the photos.|照片在这里。|给证据
+How can you fix this?|你们怎么处理？|要方案
+Please check before shipping next time.|下次发货前请检查。|提要求
+P|The ___ is different from the sample.|color / size / quality
+W|damaged=损坏的;quality=质量;different=不同的;fix=解决;check=检查
+T|用英语写一条质量投诉消息。
+
+#73|和平台经理沟通
+Hi, I'm the owner of this shop.|你好，我是这个店的老板。|TikTok Shop 客户经理
+Our account has a problem.|我们账号有问题。|讲问题
+Can you help us with traffic?|能帮我们弄点流量吗？|要资源
+Are there any campaigns this month?|这个月有什么活动吗？|问活动
+Thanks for your support.|谢谢你的支持。|收尾
+P|Can you help us with ___?|traffic / the campaign / the account
+W|account=账号;owner=老板，店主;campaign=活动;support=支持;shop=店铺
+T|用英语给平台经理写一条消息，问这个月的活动。
+
+#74|线上会议
+Can you hear me?|能听到我吗？|开场
+You're on mute.|你静音了。|提醒
+Let me share my screen.|我共享一下屏幕。|演示
+Sorry, you broke up.|抱歉，你刚才卡了。|网络
+Let's wrap up here.|我们就到这吧。|结束
+P|Let me share ___.|my screen / the file / the link
+W|mute=静音;screen=屏幕;share=分享;link=链接;wrap up=结束
+T|下次开线上会，用英语说一句 Let me share my screen.
+
+#75|写消息和邮件
+Hi Tom, hope you're well.|Tom你好，希望你一切都好。|开头
+Just a quick question.|就问个小问题。|进入正题
+Please see the attached file.|请看附件。|附件
+Could you reply by Friday?|周五前能回复吗？|要时间
+Best regards, Lao Fang.|祝好，老方。|结尾
+P|Could you reply by ___?|Friday / tomorrow / the end of today
+W|attached=附加的;reply=回复;quick=快的;regards=问候;file=文件
+T|用英语写一封5句话的工作邮件，结构照搬今天的句子。
+
+#76|表达观点
+I think it's a good idea.|我觉得这是个好主意。|赞同
+In my opinion, it's too risky.|在我看来太冒险了。|反对
+I agree with you.|我同意你。|赞同
+I'm not sure about that.|我不太确定。|委婉反对
+Let me think about it.|让我想想。|争取时间
+P|I think ___.|it's a good idea / we should wait / it will work
+W|think=认为;opinion=观点;agree=同意;risky=冒险的;sure=确定的
+T|对一件工作上的事，用 I think ... because ... 说出你的看法。
+
+#77|介绍公司
+We're a live commerce company.|我们是一家直播电商公司。|开场
+We started in 2023.|我们2023年成立。|换成真实年份
+We have 20 people.|我们有20个人。|换成真实人数
+We focus on the Thai market.|我们专注泰国市场。|讲方向
+We're growing fast.|我们发展很快。|讲势头
+P|We focus on ___.|the Thai market / fashion / beauty
+W|company=公司;focus on=专注于;market=市场;grow=增长;people=人
+T|用英语录一段30秒的公司介绍。
+
+#78|饭局寒暄
+Thanks for having me.|谢谢款待。|到场
+This place is great.|这地方很不错。|夸场地
+How's business these days?|最近生意怎么样？|聊生意
+Let's keep in touch.|保持联系。|收尾
+Here's my LINE.|这是我的LINE。|加好友
+P|How's ___ these days?|business / your team / life
+W|business=生意;these days=最近;keep in touch=保持联系;contact=联系方式;dinner=晚餐
+T|想象在饭局上认识一个外国老板，用英语聊3句。
+
+#79|合作提案
+We have an idea.|我们有个想法。|开场
+We can sell your products on our live.|我们可以在直播间卖你的产品。|讲方案
+It's a win-win.|这是双赢。|讲好处
+Let's try one month first.|先试一个月。|降低门槛
+What do you think?|你觉得呢？|抛问题
+P|Let's try ___ first.|one month / one live / 100 pieces
+W|idea=想法;partner=合作伙伴;win-win=双赢;try=试;cooperate=合作
+T|用英语把你的一个合作想法说清楚，30秒。
+
+#80|跟进催进度
+Any update?|有进展吗？|催进度
+Just following up.|只是跟进一下。|礼貌开头
+We're waiting for your reply.|我们在等你的回复。|讲状态
+It's a bit urgent.|有点急。|强调
+Thanks, I'll wait for your news.|谢谢，等你消息。|收尾
+P|We're waiting for ___.|your reply / the samples / the payment
+W|update=进展;follow up=跟进;wait=等;urgent=紧急的;news=消息
+T|用英语给一个回复慢的人发一条礼貌催促消息。
+
+#81|拒绝和讲条件
+Sorry, we can't do that.|抱歉，这个我们做不到。|拒绝
+That's our lowest price.|这是我们最低价了。|守价
+If you pay first, we can do it.|如果你先付款，我们可以做。|讲条件
+Let me ask my team.|我问一下团队。|争取时间
+I'll get back to you.|我回头答复你。|收尾
+P|If you ___, we can do it.|pay first / order 500 / wait a week
+W|lowest=最低的;condition=条件;first=先;team=团队;get back to=回复
+T|用 If you ..., we can ... 练习讲3个条件。
+
+#82|讲数字和目标
+Our sales grew 30% this month.|这个月销售涨了30%。|讲增长
+We aim to double it next year.|我们目标明年翻倍。|讲目标
+Our average order is 400 baht.|我们客单价400泰铢。|讲客单
+About half of them come back.|大约一半会回购。|讲复购
+It's still early.|现在还早。|谦虚
+P|Our sales grew ___.|10% / 30% / a lot
+W|grow=增长;double=翻倍;average=平均的;percent=百分比;aim=目标
+T|用英语说出你今年的一个数字目标。
+
+#83|商务纠纷
+I understand your concern.|我理解你的担心。|先共情
+Let's look at the facts.|我们看看事实。|讲事实
+It's not anyone's fault.|这不是谁的错。|降温
+How about this?|这样如何？|提方案
+Let's move forward.|我们往前看。|收尾
+P|How about ___?|this / next week / a 10% discount
+W|concern=担心;fact=事实;fault=错;forward=向前;solution=解决方案
+T|用英语处理一个想象中的合作纠纷，说5句。
+
+#84|商务阶段复盘
+Let me introduce my company.|我来介绍一下我的公司。|开场
+We sell on TikTok in Thailand.|我们在泰国TikTok上卖货。|讲业务
+We're looking for good partners.|我们在找好的合作伙伴。|讲需求
+Here's what we can offer.|这是我们能提供的。|讲价值
+I look forward to working with you.|期待与你合作。|收尾
+P|I look forward to ___.|working with you / meeting you / your reply
+W|introduce=介绍;partner=伙伴;offer=提供;look forward to=期待;Thailand=泰国
+T|录一条1分钟英语“商务电梯演讲”。
+
+#85|讲今天
+Today was a busy day.|今天很忙。|开头
+I had three meetings.|我开了三个会。|讲过程
+We went live at eight.|我们8点开播。|讲过程
+I'm tired but happy.|我累但开心。|讲感受
+Tomorrow will be better.|明天会更好。|收尾
+P|Today was a ___ day.|busy / good / long
+W|busy=忙的;meeting=会议;tired=累的;happy=开心的;better=更好的
+T|睡前用英语说5句今天发生了什么。
+
+#86|讲昨天（过去时）
+Yesterday I went to the market.|昨天我去了市场。|讲过去
+I met a new supplier.|我见了一个新供应商。|讲过去
+We talked for two hours.|我们聊了两个小时。|讲过去
+I learned something new.|我学到了新东西。|讲收获
+It was a good day.|那是美好的一天。|收尾
+P|Yesterday I ___.|went to the office / met a friend / worked late
+W|went=去了;met=见了;talked=聊了;learned=学到了;was=是（过去式）
+T|用过去时讲讲你昨天做的3件事。
+
+#87|讲计划（将来）
+Next month I'm going to open a new shop.|下个月我要开个新店。|讲计划
+I'm going to hire more hosts.|我要招更多主播。|讲计划
+We're planning a big sale.|我们在计划一次大促。|讲计划
+I hope it goes well.|希望一切顺利。|讲期望
+Wish me luck!|祝我好运！|收尾
+P|I'm going to ___.|hire more people / travel / learn more English
+W|plan=计划;going to=将要;hope=希望;luck=运气;open=开
+T|用 I'm going to ... 说出你下个月的3个计划。
+
+#88|讲原因
+I came to Bangkok for business.|我因为生意来曼谷。|讲原因
+I'm learning English because I need it.|我学英语是因为我需要。|讲原因
+That's why I work hard.|这就是我努力的原因。|讲原因
+The reason is simple.|原因很简单。|讲原因
+It's worth it.|值得。|收尾
+P|I'm learning English because ___.|I need it / of my business / I want to travel
+W|because=因为;reason=原因;simple=简单的;worth=值得的;why=为什么
+T|用 because 说出你学英语的3个真实原因。
+
+#89|比较
+Bangkok is hotter than my hometown.|曼谷比我老家热。|比较
+Live selling is harder than I thought.|直播带货比我想的难。|比较
+English is easier than Thai for me.|对我来说英语比泰语容易。|比较
+This one is the best.|这个是最好的。|最高级
+They're about the same.|它们差不多。|一样
+P|It's ___ than I thought.|harder / easier / better
+W|than=比;hotter=更热的;harder=更难的;easier=更容易的;same=相同的
+T|用 ... than ... 比较曼谷和你的老家，说3句。
+
+#90|描述人
+She's very friendly.|她很友好。|性格
+He's hardworking.|他很勤奋。|性格
+She's good with customers.|她很会和客户打交道。|能力
+He's a bit shy.|他有点害羞。|性格
+She's my best host.|她是我最好的主播。|评价
+P|She's very ___.|friendly / hardworking / funny
+W|friendly=友好的;hardworking=勤奋的;shy=害羞的;funny=有趣的;customer=客户
+T|用英语描述你团队里的3个人。
+
+#91|讲困难
+It wasn't easy.|这不容易。|开头
+I made a lot of mistakes.|我犯了很多错。|讲过程
+Sometimes I wanted to give up.|有时我想放弃。|讲感受
+But I kept going.|但我坚持下来了。|转折
+Now I'm stronger.|现在我更强大了。|收尾
+P|Sometimes I ___.|feel tired / want to give up / miss home
+W|easy=容易的;mistake=错误;give up=放弃;keep going=坚持;stronger=更强的
+T|用英语讲一段你创业中最难的时刻。
+
+#92|鼓励和安慰
+Don't give up.|别放弃。|鼓励
+You can do it.|你可以的。|鼓励
+Everyone makes mistakes.|每个人都会犯错。|安慰
+Take a break, then try again.|休息一下，再试一次。|建议
+I'm here if you need me.|需要我的话我在。|支持
+P|Don't ___.|give up / worry / be shy
+W|encourage=鼓励;worry=担心;again=再次;need=需要;everyone=每个人
+T|用英语给一个最近压力大的人发一句鼓励。
+
+#93|表达感受
+I'm so excited!|我好兴奋！|感受
+I'm a bit nervous.|我有点紧张。|感受
+I'm really happy for you.|我真为你高兴。|祝贺
+That's so annoying.|那太烦了。|吐槽
+I feel much better now.|我现在感觉好多了。|感受
+P|I'm a bit ___.|nervous / tired / worried
+W|excited=兴奋的;nervous=紧张的;annoying=烦人的;feel=感觉;happy=开心的
+T|睡前用 I feel ... 说出今天的2种感受。
+
+#94|工作信条
+Done is better than perfect.|完成比完美更重要。|信条
+Small steps every day.|每天一小步。|信条
+Focus on what you can control.|专注于你能控制的。|信条
+Customers come first.|客户第一。|信条
+Keep it simple.|保持简单。|信条
+P|___ comes first.|Customer service / Health / Family
+W|perfect=完美的;step=步;focus=专注;control=控制;simple=简单的
+T|用英语说出你最认同的一句工作信条，并用一句话解释为什么。
+
+#95|我在曼谷的一天
+I wake up at nine.|我9点起床。|讲日常
+I go to the office at eleven.|我11点到公司。|讲日常
+In the afternoon, I check the data.|下午我看数据。|讲日常
+At night, we go live.|晚上我们直播。|讲日常
+I go to bed after midnight.|我过了午夜才睡。|讲日常
+P|At night, I ___.|go live / check the data / read a book
+W|wake up=醒来;office=办公室;afternoon=下午;night=晚上;midnight=午夜
+T|录一条1分钟英语视频：A day in my life in Bangkok.
+
+#96|我最常用的英语
+"Can you say that again?" saved me many times.|“能再说一遍吗”救了我很多次。|回顾
+I use "Let me check" every day.|我每天都用“我查一下”。|回顾
+Short sentences work best.|短句最好用。|心得
+I'm not afraid to speak now.|我现在不怕开口了。|心得
+My accent is OK.|我的口音没关系。|心得
+P|I use "___" every day.|Let me check / No problem / Thank you
+W|use=使用;sentence=句子;afraid=害怕的;accent=口音;speak=说
+T|列出你这96天最常用的5句英语，各说一遍。
+
+#97|说错了怎么改
+Sorry, I mean Tuesday.|抱歉，我是说周二。|口误纠正
+Let me say that again.|我重说一遍。|重说
+Is that the right word?|这个词用得对吗？|求证
+Please correct me.|请纠正我。|求助
+Thanks, I learned something.|谢谢，我学到了。|收尾
+P|Sorry, I mean ___.|Tuesday / 500 / the black one
+W|mean=意思是;correct=纠正;right=对的;wrong=错的;word=词
+T|找一段你之前的英语录音，听一遍，用英语说出你的一个错误。
+
+#98|和外国朋友深聊
+What do you think about Thailand?|你觉得泰国怎么样？|开话题
+How long have you been here?|你来这多久了？|开话题
+What do you miss about home?|你想念家乡什么？|深聊
+That's interesting, tell me more.|有意思，多说说。|让对方多说
+We should hang out sometime.|我们找时间一起玩吧。|约下次
+P|What do you think about ___?|Thailand / Thai food / TikTok
+W|interesting=有趣的;miss=想念;home=家乡;hang out=出去玩;sometime=某个时候
+T|找一个外国朋友（或AI），用英语聊满5分钟。
+
+#99|给自己打分
+I can introduce myself easily now.|我现在能轻松自我介绍了。|进步
+I can manage my team in English.|我能用英语管理团队了。|进步
+I still need more practice.|我还需要更多练习。|不足
+My listening is getting better.|我的听力在进步。|进步
+I'll keep going after 100 days.|100天后我会继续。|决心
+P|I can ___ in English now.|order food / run a meeting / sell on live
+W|easily=轻松地;manage=管理;practice=练习;listening=听力;keep going=继续
+T|用英语给自己这100天打个分，说3个进步、1个不足。
+
+#100|100天毕业视频
+Hi, I'm Lao Fang.|大家好，我是老方。|开场
+100 days ago, I was afraid to speak English.|100天前我不敢说英语。|讲过去
+I practiced five sentences every day.|我每天练5句。|讲方法
+Now I can talk to my team and partners.|现在我能和团队、伙伴交流了。|讲结果
+If I can do it, you can too!|我能做到，你也能！|收尾
+P|Now I can ___.|talk to my team / go live in English / make new friends
+W|ago=以前;afraid=害怕的;practice=练习;partner=伙伴;too=也
+T|录一条2分钟英语“100天毕业视频”，发到TikTok或朋友圈！
+`;
+
+    function categoryForDay(day) {
+      if (day <= 15) return "开口基础";
+      if (day <= 30) return "曼谷生活英语";
+      if (day <= 48) return "招聘与带团队";
+      if (day <= 68) return "直播电商英语";
+      if (day <= 84) return "商务沟通";
+      return "自由表达与复盘";
+    }
+
+    function parseLessons(text) {
+      return text.trim().split(/\n(?=#\d+\|)/).map((block) => {
+        const lines = block.trim().split("\n").map((line) => line.trim()).filter(Boolean);
+        const [dayPart, theme] = lines[0].slice(1).split("|");
+        const day = Number(dayPart);
+        const lesson = { day, theme, category: categoryForDay(day), phrases: [], words: [], pattern: "", subs: [], task: "" };
+        lines.slice(1).forEach((line) => {
+          const parts = line.split("|");
+          if (parts[0] === "P") {
+            lesson.pattern = parts[1];
+            lesson.subs = parts[2].split("/").map((sub) => sub.trim());
+          } else if (parts[0] === "W") {
+            lesson.words = parts[1].split(";").map((pair) => {
+              const [english, chinese] = pair.split("=");
+              return { english, chinese };
+            });
+          } else if (parts[0] === "T") {
+            lesson.task = parts.slice(1).join("|");
+          } else {
+            const [english, chinese, usage] = parts;
+            lesson.phrases.push({ english, chinese, usage: usage || "" });
+          }
+        });
+        return lesson;
+      });
+    }
+
+    const lessons = parseLessons(lessonText);
+
+    const encouragements = [
+      "今天又多会了5句英语。",
+      "在曼谷，多一门能开口的语言，就多一条路。",
+      "说错不丢人，不开口才可惜。",
+      "直播间要转化，老板也要敢说英语。",
+      "短句说熟了，就是你的武器。"
+    ];
+
+    const STORAGE_KEY = "laofangEnglish100State";
+    const DAY_KEY = "laofangEnglish100CurrentDay";
+    const PREF_KEY = "laofangEnglish100Prefs";
+
+    function readStorage(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeStorage(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (error) {
+        // 隐私模式下无法保存，页面照常可用
+      }
+    }
+
+    let currentDay = Number(readStorage(DAY_KEY)) || 1;
+    let currentQuizPhrase = null;
+    let prefs = { hideEnglish: false, slow: false };
+    try {
+      prefs = { ...prefs, ...JSON.parse(readStorage(PREF_KEY) || "{}") };
+    } catch (error) {
+      // 使用默认设置
+    }
+
+    function loadState() {
+      const raw = readStorage(STORAGE_KEY);
+      if (!raw) return { completedDays: [], completionDates: {} };
+      try {
+        return normalizeState(JSON.parse(raw));
+      } catch (error) {
+        return { completedDays: [], completionDates: {} };
+      }
+    }
+
+    function saveState(state) {
+      writeStorage(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function normalizeState(state) {
+      const completedDays = [...new Set((state.completedDays || [])
+        .map(Number)
+        .filter((day) => Number.isInteger(day) && day >= 1 && day <= 100))]
+        .sort((a, b) => a - b);
+      const completionDates = {};
+      Object.keys(state.completionDates || {}).forEach((key) => {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(key)) completionDates[key] = true;
+      });
+      return { completedDays, completionDates };
+    }
+
+    function dateKeyFromOffset(offset) {
+      const date = new Date();
+      date.setDate(date.getDate() - offset);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function calculateStreak(completionDates) {
+      // 今天还没打卡时，从昨天开始算，连续天数不会一早就清零
+      let offset = completionDates[dateKeyFromOffset(0)] ? 0 : 1;
+      let streak = 0;
+      while (completionDates[dateKeyFromOffset(offset)]) {
+        streak += 1;
+        offset += 1;
+      }
+      return streak;
+    }
+
+    function getLesson(day) {
+      return lessons.find((lesson) => lesson.day === day) || lessons[0];
+    }
+
+    function fillPattern(pattern, sub) {
+      return pattern.replace("___", sub);
+    }
+
+    let englishVoice = null;
+
+    function pickVoice() {
+      if (!("speechSynthesis" in window)) return;
+      const voices = window.speechSynthesis.getVoices();
+      englishVoice = voices.find((voice) => voice.lang === "en-US" && /Google|Samantha|Aria|Jenny|Natural/i.test(voice.name))
+        || voices.find((voice) => voice.lang === "en-US")
+        || voices.find((voice) => voice.lang.startsWith("en"))
+        || null;
+    }
+
+    if ("speechSynthesis" in window) {
+      pickVoice();
+      window.speechSynthesis.onvoiceschanged = pickVoice;
+    }
+
+    function speak(text, onEnd) {
+      if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+        showToast("这个浏览器不支持朗读，请换 Chrome 或 Safari");
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      if (englishVoice) utterance.voice = englishVoice;
+      utterance.rate = prefs.slow ? 0.6 : 0.92;
+      if (onEnd) utterance.onend = onEnd;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakNow(text) {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      speak(text);
+    }
+
+    function playAll() {
+      if (!("speechSynthesis" in window)) {
+        showToast("这个浏览器不支持朗读，请换 Chrome 或 Safari");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const phrases = getLesson(currentDay).phrases;
+      let index = 0;
+      const next = () => {
+        if (index >= phrases.length) return;
+        const text = phrases[index].english;
+        index += 1;
+        // 每句之后留出跟读时间
+        speak(text, () => setTimeout(next, prefs.slow ? 2600 : 1800));
+      };
+      next();
+      showToast("每句后会停顿，跟着读出来");
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function renderDaySelect() {
+      const state = loadState();
+      document.getElementById("daySelect").innerHTML = lessons.map((lesson) => {
+        const done = state.completedDays.includes(lesson.day) ? " ✓" : "";
+        return `<option value="${lesson.day}">Day ${lesson.day} · ${escapeHtml(lesson.theme)}${done}</option>`;
+      }).join("");
+    }
+
+    function renderModes() {
+      document.getElementById("phraseList").classList.toggle("hide-en", prefs.hideEnglish);
+      const hideBtn = document.getElementById("hideToggle");
+      hideBtn.textContent = `开口模式：${prefs.hideEnglish ? "开" : "关"}`;
+      hideBtn.classList.toggle("on", prefs.hideEnglish);
+      const slowBtn = document.getElementById("slowToggle");
+      slowBtn.textContent = `慢速：${prefs.slow ? "开" : "关"}`;
+      slowBtn.classList.toggle("on", prefs.slow);
+    }
+
+    function renderLesson() {
+      const lesson = getLesson(currentDay);
+      const state = loadState();
+      const completed = state.completedDays.includes(currentDay);
+
+      writeStorage(DAY_KEY, String(currentDay));
+      renderDaySelect();
+      document.getElementById("daySelect").value = String(currentDay);
+      document.getElementById("prevDay").disabled = currentDay === 1;
+      document.getElementById("nextDay").disabled = currentDay === 100;
+      document.getElementById("dayText").textContent = `Day ${lesson.day}`;
+      document.getElementById("categoryText").textContent = lesson.category;
+      document.getElementById("themeText").textContent = `今日主题：${lesson.theme}`;
+      document.getElementById("taskText").textContent = lesson.task;
+
+      document.getElementById("phraseList").innerHTML = lesson.phrases.map((phrase, index) => `
+        <div class="phrase">
+          <div>
+            <p class="chinese">${index + 1}. ${escapeHtml(phrase.chinese)}</p>
+            <p class="english">${escapeHtml(phrase.english)}</p>
+            <p class="usage">使用场景：${escapeHtml(phrase.usage)}</p>
+          </div>
+          <button class="sound" data-speak="${escapeHtml(phrase.english)}" aria-label="播放英语发音">▶</button>
+        </div>
+      `).join("");
+
+      document.getElementById("patternText").textContent = lesson.pattern;
+      document.getElementById("subList").innerHTML = lesson.subs.map((sub) => `
+        <button class="sub" data-speak="${escapeHtml(fillPattern(lesson.pattern, sub))}">${escapeHtml(sub)}</button>
+      `).join("");
+
+      document.getElementById("wordList").innerHTML = lesson.words.map((word) => `
+        <div class="word">
+          <div>
+            <p class="english">${escapeHtml(word.english)}</p>
+            <p class="chinese">${escapeHtml(word.chinese)}</p>
+          </div>
+          <button class="sound" data-speak="${escapeHtml(word.english)}" aria-label="播放单词发音">▶</button>
+        </div>
+      `).join("");
+
+      document.getElementById("completeBtn").textContent = completed ? "今日已完成 ✓" : "完成今日学习";
+      document.getElementById("doneMsg").classList.toggle("show", completed);
+      document.getElementById("doneMsg").textContent = completed ? encouragements[(currentDay - 1) % encouragements.length] : "";
+
+      renderModes();
+      renderStats();
+      renderReview();
+      resetRecorder();
+    }
+
+    function renderStats() {
+      const state = loadState();
+      document.getElementById("streakText").textContent = calculateStreak(state.completionDates);
+      document.getElementById("totalText").textContent = state.completedDays.length;
+      document.getElementById("progressBar").style.width = `${state.completedDays.length}%`;
+    }
+
+    function renderReview() {
+      const offsets = [
+        { label: "昨天", value: 1 },
+        { label: "3天前", value: 3 },
+        { label: "7天前", value: 7 }
+      ];
+      const reviewItems = offsets
+        .map((offset) => {
+          const reviewDay = currentDay - offset.value;
+          if (reviewDay < 1) return "";
+          const lesson = getLesson(reviewDay);
+          return `
+            <div class="review-item">
+              <p class="review-origin">${offset.label} · Day ${reviewDay} · ${escapeHtml(lesson.theme)}</p>
+              ${lesson.phrases.map((phrase) => `
+                <div class="review-phrase">
+                  <div>
+                    <p class="english">${escapeHtml(phrase.english)}</p>
+                    <p class="chinese">${escapeHtml(phrase.chinese)}</p>
+                  </div>
+                  <button class="sound" data-speak="${escapeHtml(phrase.english)}" aria-label="播放复习句子发音">▶</button>
+                </div>
+              `).join("")}
+            </div>
+          `;
+        })
+        .filter(Boolean);
+
+      document.getElementById("reviewList").innerHTML = reviewItems.length
+        ? reviewItems.join("")
+        : `<p class="empty">暂无复习内容</p>`;
+    }
+
+    function completeToday() {
+      const state = loadState();
+      if (!state.completedDays.includes(currentDay)) {
+        state.completedDays.push(currentDay);
+        state.completedDays.sort((a, b) => a - b);
+      }
+      state.completionDates[dateKeyFromOffset(0)] = true;
+      saveState(state);
+      renderLesson();
+      showToast(encouragements[(currentDay - 1) % encouragements.length]);
+    }
+
+    function copyTodayContent() {
+      const lesson = getLesson(currentDay);
+      const text = [
+        `老方英语100天计划 · Day ${lesson.day}`,
+        `${lesson.category} · ${lesson.theme}`,
+        "",
+        ...lesson.phrases.map((phrase, index) => `${index + 1}. ${phrase.english}\n   ${phrase.chinese}（${phrase.usage}）`),
+        "",
+        `今日句型：${lesson.pattern}`,
+        `换词说：${lesson.subs.map((sub) => fillPattern(lesson.pattern, sub)).join(" / ")}`,
+        "",
+        `单词：${lesson.words.map((word) => `${word.english} ${word.chinese}`).join("；")}`,
+        "",
+        `实战任务：${lesson.task}`
+      ].join("\n");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(() => showToast("今日内容已复制，可以发到微信"))
+          .catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textarea = document.getElementById("syncCode");
+      textarea.value = text;
+      textarea.select();
+      document.execCommand("copy");
+      showToast("已复制（也显示在进度同步框里）");
+    }
+
+    // 录音：只存在当前页面，刷新就没了
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function resetRecorder() {
+      if (mediaRecorder && mediaRecorder.state === "recording") mediaRecorder.stop();
+      const audio = document.getElementById("recAudio");
+      audio.hidden = true;
+      audio.removeAttribute("src");
+      document.getElementById("recBtn").textContent = "● 录音";
+      document.getElementById("recNote").textContent = "把5句录下来，和标准发音对比听一遍。";
+    }
+
+    async function toggleRecording() {
+      const button = document.getElementById("recBtn");
+      if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        return;
+      }
+      if (!navigator.mediaDevices || !window.MediaRecorder) {
+        showToast("这个浏览器不支持录音，可以用手机自带录音");
+        return;
+      }
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size) recordedChunks.push(event.data);
+        };
+        mediaRecorder.onstop = () => {
+          stream.getTracks().forEach((track) => track.stop());
+          const audio = document.getElementById("recAudio");
+          audio.src = URL.createObjectURL(new Blob(recordedChunks, { type: mediaRecorder.mimeType }));
+          audio.hidden = false;
+          button.textContent = "● 重新录";
+          document.getElementById("recNote").textContent = "听一听，哪句和标准发音不一样？";
+        };
+        mediaRecorder.start();
+        button.textContent = "■ 停止";
+        document.getElementById("recNote").textContent = "录音中……把今天5句读一遍";
+      } catch (error) {
+        showToast("没有麦克风权限，可以用手机自带录音");
+      }
+    }
+
+    function encodeProgress(payload) {
+      const bytes = new TextEncoder().encode(JSON.stringify(payload));
+      let binary = "";
+      bytes.forEach((byte) => {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary);
+    }
+
+    function decodeProgress(code) {
+      const binary = atob(code.trim());
+      const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+      return JSON.parse(new TextDecoder().decode(bytes));
+    }
+
+    function exportProgress() {
+      const payload = {
+        app: "laofang-english-100",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        currentDay,
+        state: normalizeState(loadState())
+      };
+      const code = encodeProgress(payload);
+      const textarea = document.getElementById("syncCode");
+      textarea.value = code;
+      textarea.select();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code)
+          .then(() => showToast("进度码已复制，可以发到微信"))
+          .catch(() => showToast("进度码已生成，可以手动复制"));
+      } else {
+        document.execCommand("copy");
+        showToast("进度码已生成，可以手动复制");
+      }
+    }
+
+    function importProgress() {
+      const textarea = document.getElementById("syncCode");
+      if (!textarea.value.trim()) {
+        showToast("请先粘贴进度码");
+        return;
+      }
+
+      try {
+        const payload = decodeProgress(textarea.value);
+        if (!payload || payload.app !== "laofang-english-100" || !payload.state) {
+          throw new Error("Invalid progress code");
+        }
+        saveState(normalizeState(payload.state));
+        if (Number.isInteger(payload.currentDay) && payload.currentDay >= 1 && payload.currentDay <= 100) {
+          currentDay = payload.currentDay;
+        }
+        renderLesson();
+        showToast("进度已导入");
+      } catch (error) {
+        showToast("进度码无效，请重新复制完整内容");
+      }
+    }
+
+    function randomQuiz() {
+      const state = loadState();
+      const pool = state.completedDays.flatMap((day) => getLesson(day).phrases);
+
+      if (!pool.length) {
+        showToast("先完成至少一天打卡，再随机抽查。");
+        return;
+      }
+
+      currentQuizPhrase = pool[Math.floor(Math.random() * pool.length)];
+      document.getElementById("quizEmpty").style.display = "none";
+      document.getElementById("quizBox").classList.add("show");
+      document.getElementById("quizChinese").textContent = currentQuizPhrase.chinese;
+      document.getElementById("quizUsage").textContent = `使用场景：${currentQuizPhrase.usage}`;
+      document.getElementById("quizEnglish").textContent = currentQuizPhrase.english;
+      document.getElementById("quizAnswer").classList.remove("show");
+    }
+
+    function resetQuiz() {
+      currentQuizPhrase = null;
+      document.getElementById("quizEmpty").style.display = "block";
+      document.getElementById("quizBox").classList.remove("show");
+      document.getElementById("quizAnswer").classList.remove("show");
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function savePrefs() {
+      writeStorage(PREF_KEY, JSON.stringify(prefs));
+    }
+
+    function goToDay(day) {
+      currentDay = Math.min(100, Math.max(1, day));
+      resetQuiz();
+      renderLesson();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.getElementById("prevDay").addEventListener("click", () => goToDay(currentDay - 1));
+    document.getElementById("nextDay").addEventListener("click", () => goToDay(currentDay + 1));
+    document.getElementById("daySelect").addEventListener("change", (event) => goToDay(Number(event.target.value)));
+    document.getElementById("copyToday").addEventListener("click", copyTodayContent);
+    document.getElementById("completeBtn").addEventListener("click", completeToday);
+    document.getElementById("randomQuiz").addEventListener("click", randomQuiz);
+    document.getElementById("resetQuiz").addEventListener("click", resetQuiz);
+    document.getElementById("showAnswer").addEventListener("click", () => {
+      document.getElementById("quizAnswer").classList.add("show");
+      if (currentQuizPhrase) speakNow(currentQuizPhrase.english);
+    });
+    document.getElementById("quizSpeak").addEventListener("click", () => {
+      if (currentQuizPhrase) speakNow(currentQuizPhrase.english);
+    });
+    document.getElementById("exportProgress").addEventListener("click", exportProgress);
+    document.getElementById("importProgress").addEventListener("click", importProgress);
+    document.getElementById("playAll").addEventListener("click", playAll);
+    document.getElementById("recBtn").addEventListener("click", toggleRecording);
+    document.getElementById("hideToggle").addEventListener("click", () => {
+      prefs.hideEnglish = !prefs.hideEnglish;
+      savePrefs();
+      document.querySelectorAll(".phrase.revealed").forEach((item) => item.classList.remove("revealed"));
+      renderModes();
+    });
+    document.getElementById("slowToggle").addEventListener("click", () => {
+      prefs.slow = !prefs.slow;
+      savePrefs();
+      renderModes();
+    });
+
+    document.addEventListener("click", (event) => {
+      const speakButton = event.target.closest("[data-speak]");
+      if (speakButton) {
+        speakNow(speakButton.dataset.speak);
+        return;
+      }
+      const phrase = event.target.closest(".hide-en .phrase");
+      if (phrase) phrase.classList.add("revealed");
+    });
+
+    if (currentDay < 1 || currentDay > 100) currentDay = 1;
+    renderLesson();
+  </script>
+</body>
+</html>
